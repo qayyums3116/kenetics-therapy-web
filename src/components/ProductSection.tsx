@@ -25,21 +25,21 @@ const ProductSection = () => {
 
   const technologies = [
     {
-      icon: Brain,
-      title: 'Artificial Intelligence',
-      description: 'Advanced AI algorithms analyze movement patterns and provide real-time feedback for optimal therapy outcomes.',
+      icon: Cpu,
+      title: 'MACHINE LEARNING',
+      description: 'Harness the power of our advanced machine learning for precise assessments, personalized treatment plans, progress tracking, and enhanced patient engagement. Elevate the expertise of physical therapists with data-driven insights.',
       delay: 'delay-100'
     },
     {
-      icon: Cpu,
-      title: 'Machine Learning',
-      description: 'Our ML models continuously learn from your progress to personalize and adapt your therapy plan.',
+      icon: Brain,
+      title: 'ARTIFICIAL INTELLIGENCE',
+      description: 'Leverage advanced technology for precise assessment, adjustments to treatment plans, progress monitoring, outcome prediction, and patient engagement, enhancing the expertise of trained therapists.',
       delay: 'delay-200'
     },
     {
       icon: MessageSquare,
-      title: 'Language Processing',
-      description: 'Natural language processing enables intuitive communication and guidance throughout your therapy journey.',
+      title: 'LANGUAGE MODELS',
+      description: 'Utilizing language modeling in on-demand physical therapy, providers can streamline the communication process, improve the quality of care, and enhance the overall patient experience in a remote or digital healthcare environment.',
       delay: 'delay-300'
     }
   ];
@@ -60,39 +60,26 @@ const ProductSection = () => {
           {technologies.map((tech, index) => (
             <div
               key={index}
-              className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group ${
+              className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 group cursor-pointer transform hover:scale-105 ${
                 isVisible ? `animate-fade-in-up ${tech.delay}` : 'opacity-0'
               }`}
+              style={{
+                animation: isVisible ? `float 6s ease-in-out infinite ${index * 0.5}s` : 'none'
+              }}
             >
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[hsl(var(--kenetics-primary))] rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <tech.icon size={32} className="text-black" />
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-[hsl(var(--kenetics-primary))] rounded-full mb-6 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg group-hover:shadow-xl">
+                  <tech.icon size={36} className="text-black group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">
+                <h3 className="text-xl font-bold text-[hsl(var(--kenetics-dark))] mb-4 group-hover:text-[hsl(var(--kenetics-primary))] transition-colors duration-300">
                   {tech.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
                   {tech.description}
                 </p>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Technology Demo Image */}
-        <div className={`mt-16 text-center ${isVisible ? 'animate-fade-in-up delay-400' : 'opacity-0'}`}>
-          <div className="relative max-w-4xl mx-auto">
-            <img
-              src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80"
-              alt="AI Technology Circuit Board"
-              className="w-full h-64 md:h-80 object-cover rounded-2xl shadow-lg"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl"></div>
-            <div className="absolute bottom-6 left-6 text-white">
-              <h4 className="text-xl font-bold mb-2">AI-Powered Motion Analysis</h4>
-              <p className="text-sm opacity-90">Real-time movement tracking and correction</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -12,22 +12,35 @@ const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 animate-gradient-x"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        background: 'linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483)',
+        backgroundSize: '400% 400%',
+        animation: 'gradient 15s ease infinite'
       }}
     >
+      <style jsx>{`
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      `}</style>
+      
       <div className="container mx-auto px-4 text-center text-white relative z-10">
         <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Transforming At-Home
+            TRANSFORMING THE DELIVERY
             <br />
-            <span className="text-[hsl(var(--kenetics-primary))]">Physical Therapy</span>
+            OF AT HOME
             <br />
-            with AI Technology
+            <span className="text-[hsl(var(--kenetics-primary))]">PHYSICAL THERAPY</span>
           </h1>
           
           <p className={`text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-200 ${isVisible ? 'animate-fade-in-up delay-200' : 'opacity-0'}`}>
