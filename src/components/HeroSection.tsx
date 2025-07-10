@@ -12,27 +12,12 @@ const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 animate-gradient-x"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden animate-gradient-x"
       style={{
         background: 'linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483)',
         backgroundSize: '400% 400%',
-        animation: 'gradient 15s ease infinite'
       }}
     >
-      <style jsx>{`
-        @keyframes gradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-      `}</style>
-      
       <div className="container mx-auto px-4 text-center text-white relative z-10">
         <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
