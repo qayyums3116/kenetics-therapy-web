@@ -1,14 +1,30 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Determine active section based on scroll position
+      const sections = ['home', 'product', 'about', 'therapy', 'contact'];
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -20,8 +36,11 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
+      setActiveSection(sectionId);
     }
   };
+
+  const isActive = (section: string) => activeSection === section;
 
   return (
     <header 
@@ -34,7 +53,9 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl font-bold text-black">
+          <div className={`text-2xl font-bold transition-colors duration-300 ${
+            isScrolled ? 'text-black' : 'text-white'
+          }`}>
             KENETICS
           </div>
 
@@ -42,64 +63,61 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('home')}
-              className="text-black hover:text-gray-700 transition-colors font-medium"
+              className={`transition-colors font-medium ${
+                isScrolled 
+                  ? (isActive('home') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
+                  : (isActive('home') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
+              }`}
             >
               Home
             </button>
             <button 
               onClick={() => scrollToSection('product')}
-              className="text-black hover:text-gray-700 transition-colors font-medium"
+              className={`transition-colors font-medium ${
+                isScrolled 
+                  ? (isActive('product') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
+                  : (isActive('product') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
+              }`}
             >
               Product
             </button>
             <button 
               onClick={() => scrollToSection('about')}
-              className="text-black hover:text-gray-700 transition-colors font-medium"
+              className={`transition-colors font-medium ${
+                isScrolled 
+                  ? (isActive('about') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
+                  : (isActive('about') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
+              }`}
             >
               About
             </button>
             <button 
               onClick={() => scrollToSection('therapy')}
-              className="text-black hover:text-gray-700 transition-colors font-medium"
+              className={`transition-colors font-medium ${
+                isScrolled 
+                  ? (isActive('therapy') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
+                  : (isActive('therapy') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
+              }`}
             >
               Therapy Options
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="text-black hover:text-gray-700 transition-colors font-medium"
+              className={`transition-colors font-medium ${
+                isScrolled 
+                  ? (isActive('contact') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
+                  : (isActive('contact') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
+              }`}
             >
               Contact
             </button>
           </nav>
 
-          {/* Social Media Icons - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="#" 
-              className="text-black hover:text-gray-700 transition-all hover:scale-110"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a 
-              href="#" 
-              className="text-black hover:text-gray-700 transition-all hover:scale-110"
-              aria-label="Twitter"
-            >
-              <Twitter size={20} />
-            </a>
-            <a 
-              href="#" 
-              className="text-black hover:text-gray-700 transition-all hover:scale-110"
-              aria-label="Facebook"
-            >
-              <Facebook size={20} />
-            </a>
-          </div>
-
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-black"
+            className={`md:hidden transition-colors ${
+              isScrolled ? 'text-black' : 'text-white'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -113,59 +131,44 @@ const Header = () => {
             <nav className="flex flex-col py-4">
               <button 
                 onClick={() => scrollToSection('home')}
-                className="px-4 py-2 text-black hover:bg-black/10 transition-colors font-medium text-left"
+                className={`px-4 py-2 text-left font-medium transition-colors ${
+                  isActive('home') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
+                }`}
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection('product')}
-                className="px-4 py-2 text-black hover:bg-black/10 transition-colors font-medium text-left"
+                className={`px-4 py-2 text-left font-medium transition-colors ${
+                  isActive('product') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
+                }`}
               >
                 Product
               </button>
               <button 
                 onClick={() => scrollToSection('about')}
-                className="px-4 py-2 text-black hover:bg-black/10 transition-colors font-medium text-left"
+                className={`px-4 py-2 text-left font-medium transition-colors ${
+                  isActive('about') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
+                }`}
               >
                 About
               </button>
               <button 
                 onClick={() => scrollToSection('therapy')}
-                className="px-4 py-2 text-black hover:bg-black/10 transition-colors font-medium text-left"
+                className={`px-4 py-2 text-left font-medium transition-colors ${
+                  isActive('therapy') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
+                }`}
               >
                 Therapy Options
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="px-4 py-2 text-black hover:bg-black/10 transition-colors font-medium text-left"
+                className={`px-4 py-2 text-left font-medium transition-colors ${
+                  isActive('contact') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
+                }`}
               >
                 Contact
               </button>
-              
-              {/* Mobile Social Icons */}
-              <div className="flex items-center justify-center space-x-4 mt-4">
-                <a 
-                  href="#" 
-                  className="text-black hover:text-gray-700 transition-all hover:scale-110"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={20} />
-                </a>
-                <a 
-                  href="#" 
-                  className="text-black hover:text-gray-700 transition-all hover:scale-110"
-                  aria-label="Twitter"
-                >
-                  <Twitter size={20} />
-                </a>
-                <a 
-                  href="#" 
-                  className="text-black hover:text-gray-700 transition-all hover:scale-110"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={20} />
-                </a>
-              </div>
             </nav>
           </div>
         )}

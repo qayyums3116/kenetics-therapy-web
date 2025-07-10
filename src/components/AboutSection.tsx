@@ -70,6 +70,14 @@ const AboutSection = () => {
     setCurrentSlide((prev) => (prev - 1 + carouselContent.length) % carouselContent.length);
   };
 
+  // Auto-play carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4">
@@ -79,9 +87,16 @@ const AboutSection = () => {
             Meet Kenetics
           </h2>
           
-          {/* Placeholder for Image */}
-          <div className={`w-full max-w-4xl mx-auto h-64 md:h-80 bg-gray-200 rounded-2xl flex items-center justify-center mb-12 ${isVisible ? 'animate-fade-in-up delay-200' : 'opacity-0'}`}>
-            <p className="text-gray-500 text-lg">Image Placeholder - Add your image here</p>
+          {/* Kenetics Technology Image */}
+          <div className={`w-full max-w-3xl mx-auto mb-12 ${isVisible ? 'animate-fade-in-up delay-200' : 'opacity-0'}`}>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-900 to-purple-900 p-8">
+              <img 
+                src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png" 
+                alt="Kenetics AI Technology in Action - Real-time movement analysis and feedback"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+            </div>
           </div>
         </div>
 
@@ -119,28 +134,32 @@ const AboutSection = () => {
         </div>
 
         {/* Kenetics Journey Carousel */}
-        <div className={`bg-white rounded-2xl shadow-xl p-8 ${isVisible ? 'animate-fade-in-up delay-700' : 'opacity-0'}`}>
-          <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] text-center mb-4">
-            Kenetics Journey
-          </h3>
-          <p className="text-lg text-gray-600 text-center mb-8">
-            Empowering individuals through technology-driven healthcare solutions.
-          </p>
+        <div className={`bg-white rounded-2xl shadow-2xl overflow-hidden ${isVisible ? 'animate-fade-in-up delay-700' : 'opacity-0'}`}>
+          <div className="bg-gradient-to-r from-[hsl(var(--kenetics-primary))] to-[hsl(var(--kenetics-primary-dark))] p-8 text-center">
+            <h3 className="text-3xl font-bold text-black mb-4">
+              Kenetics Journey
+            </h3>
+            <p className="text-lg text-black/80">
+              Empowering individuals through technology-driven healthcare solutions.
+            </p>
+          </div>
           
-          <div className="relative">
+          <div className="relative p-8">
             <div className="overflow-hidden">
               <div 
-                className="flex transition-transform duration-500 ease-in-out"
+                className="flex transition-all duration-700 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {carouselContent.map((slide, index) => (
                   <div key={index} className="w-full flex-shrink-0 px-8">
-                    <h4 className="text-2xl font-bold text-[hsl(var(--kenetics-primary))] mb-4 text-center">
-                      {slide.title}
-                    </h4>
-                    <p className="text-gray-600 leading-relaxed text-center max-w-3xl mx-auto">
-                      {slide.content}
-                    </p>
+                    <div className="text-center">
+                      <h4 className="text-2xl font-bold text-[hsl(var(--kenetics-primary))] mb-6 animate-pulse">
+                        {slide.title}
+                      </h4>
+                      <p className="text-gray-600 leading-relaxed text-center max-w-3xl mx-auto text-lg">
+                        {slide.content}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -149,26 +168,28 @@ const AboutSection = () => {
             {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[hsl(var(--kenetics-primary))] text-black p-2 rounded-full hover:scale-110 transition-transform duration-200"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-[hsl(var(--kenetics-primary))] text-black p-3 rounded-full hover:scale-110 hover:shadow-lg transition-all duration-300 hover:bg-[hsl(var(--kenetics-primary-dark))]"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={24} />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[hsl(var(--kenetics-primary))] text-black p-2 rounded-full hover:scale-110 transition-transform duration-200"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-[hsl(var(--kenetics-primary))] text-black p-3 rounded-full hover:scale-110 hover:shadow-lg transition-all duration-300 hover:bg-[hsl(var(--kenetics-primary-dark))]"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={24} />
             </button>
           </div>
           
           {/* Carousel Indicators */}
-          <div className="flex justify-center mt-6 space-x-2">
+          <div className="flex justify-center pb-8 space-x-3">
             {carouselContent.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                  currentSlide === index ? 'bg-[hsl(var(--kenetics-primary))]' : 'bg-gray-300'
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                  currentSlide === index 
+                    ? 'bg-[hsl(var(--kenetics-primary))] scale-125 shadow-lg' 
+                    : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
             ))}
