@@ -14,7 +14,8 @@ const Header = () => {
       // Update active section based on scroll position
       const sections = ['home', 'product', 'about', 'therapy', 'testimonials', 'contact'];
       const currentSection = sections.find(section => {
-        const element = document.getElementById(section === 'home' ? 'hero' : section);
+        const targetId = section === 'home' ? 'hero' : section;
+        const element = document.getElementById(targetId);
         if (element) {
           const rect = element.getBoundingClientRect();
           return rect.top <= 100 && rect.bottom >= 100;
@@ -59,7 +60,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-[hsl(var(--kenetics-primary))] rounded-lg flex items-center justify-center">
-              <span className={`font-bold text-sm ${isScrolled ? 'text-black' : 'text-black'}`}>K</span>
+              <span className="font-bold text-sm text-black">K</span>
             </div>
             <span className={`text-xl font-bold transition-colors duration-300 ${
               isScrolled ? 'text-[hsl(var(--kenetics-dark))]' : 'text-white'
@@ -74,20 +75,17 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`font-medium transition-all duration-300 relative ${
+                className={`font-medium transition-all duration-300 relative px-3 py-2 rounded-lg ${
                   isScrolled 
                     ? activeSection === item.id 
-                      ? 'text-[hsl(var(--kenetics-primary))]' 
+                      ? 'text-white bg-[hsl(var(--kenetics-primary))]' 
                       : 'text-[hsl(var(--kenetics-dark))] hover:text-[hsl(var(--kenetics-primary))]'
                     : activeSection === item.id
-                      ? 'text-[hsl(var(--kenetics-primary))]'
+                      ? 'text-black bg-[hsl(var(--kenetics-primary))]'
                       : 'text-white hover:text-[hsl(var(--kenetics-primary))]'
                 }`}
               >
                 {item.label}
-                {activeSection === item.id && (
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[hsl(var(--kenetics-primary))] rounded-full"></span>
-                )}
               </button>
             ))}
           </nav>
@@ -113,8 +111,8 @@ const Header = () => {
                   onClick={() => handleNavClick(item.id)}
                   className={`text-left px-4 py-3 font-medium transition-colors duration-300 ${
                     activeSection === item.id 
-                      ? 'text-[hsl(var(--kenetics-primary))] bg-[hsl(var(--kenetics-primary))]/10' 
-                      : 'text-[hsl(var(--kenetics-dark))] hover:text-[hsl(var(--kenetics-primary))] hover:bg-[hsl(var(--kenetics-primary))]/5'
+                      ? 'text-white bg-[hsl(var(--kenetics-primary))]' 
+                      : 'text-[hsl(var(--kenetics-dark))] hover:text-white hover:bg-[hsl(var(--kenetics-primary))]'
                   }`}
                 >
                   {item.label}
