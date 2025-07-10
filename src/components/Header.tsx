@@ -11,10 +11,10 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Determine active section based on scroll position
-      const sections = ['home', 'product', 'about', 'therapy', 'contact'];
+      // Update active section based on scroll position
+      const sections = ['home', 'product', 'about', 'therapy', 'testimonials', 'contact'];
       const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
+        const element = document.getElementById(section === 'home' ? 'hero' : section);
         if (element) {
           const rect = element.getBoundingClientRect();
           return rect.top <= 100 && rect.bottom >= 100;
@@ -31,144 +31,95 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  const handleNavClick = (sectionId: string) => {
+    const targetId = sectionId === 'home' ? 'hero' : sectionId;
+    const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
       setActiveSection(sectionId);
     }
+    setIsMobileMenuOpen(false);
   };
 
-  const isActive = (section: string) => activeSection === section;
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'product', label: 'Product' },
+    { id: 'about', label: 'About' },
+    { id: 'therapy', label: 'Therapy' },
+    { id: 'testimonials', label: 'Testimonials' },
+    { id: 'contact', label: 'Contact' },
+  ];
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'kenetics-primary shadow-lg' 
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+    }`}>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className={`text-2xl font-bold transition-colors duration-300 ${
-            isScrolled ? 'text-black' : 'text-white'
-          }`}>
-            KENETICS
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-[hsl(var(--kenetics-primary))] rounded-lg flex items-center justify-center">
+              <span className={`font-bold text-sm ${isScrolled ? 'text-black' : 'text-black'}`}>K</span>
+            </div>
+            <span className={`text-xl font-bold transition-colors duration-300 ${
+              isScrolled ? 'text-[hsl(var(--kenetics-dark))]' : 'text-white'
+            }`}>
+              KENETICS
+            </span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('home')}
-              className={`transition-colors font-medium ${
-                isScrolled 
-                  ? (isActive('home') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
-                  : (isActive('home') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
-              }`}
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('product')}
-              className={`transition-colors font-medium ${
-                isScrolled 
-                  ? (isActive('product') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
-                  : (isActive('product') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
-              }`}
-            >
-              Product
-            </button>
-            <button 
-              onClick={() => scrollToSection('about')}
-              className={`transition-colors font-medium ${
-                isScrolled 
-                  ? (isActive('about') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
-                  : (isActive('about') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
-              }`}
-            >
-              About
-            </button>
-            <button 
-              onClick={() => scrollToSection('therapy')}
-              className={`transition-colors font-medium ${
-                isScrolled 
-                  ? (isActive('therapy') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
-                  : (isActive('therapy') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
-              }`}
-            >
-              Therapy Options
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className={`transition-colors font-medium ${
-                isScrolled 
-                  ? (isActive('contact') ? 'text-black font-bold' : 'text-black hover:text-gray-700') 
-                  : (isActive('contact') ? 'text-[hsl(var(--kenetics-primary))] font-bold' : 'text-white hover:text-gray-300')
-              }`}
-            >
-              Contact
-            </button>
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`font-medium transition-all duration-300 relative ${
+                  isScrolled 
+                    ? activeSection === item.id 
+                      ? 'text-[hsl(var(--kenetics-primary))]' 
+                      : 'text-[hsl(var(--kenetics-dark))] hover:text-[hsl(var(--kenetics-primary))]'
+                    : activeSection === item.id
+                      ? 'text-[hsl(var(--kenetics-primary))]'
+                      : 'text-white hover:text-[hsl(var(--kenetics-primary))]'
+                }`}
+              >
+                {item.label}
+                {activeSection === item.id && (
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[hsl(var(--kenetics-primary))] rounded-full"></span>
+                )}
+              </button>
+            ))}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className={`md:hidden transition-colors ${
-              isScrolled ? 'text-black' : 'text-white'
+            className={`md:hidden transition-colors duration-300 ${
+              isScrolled ? 'text-[hsl(var(--kenetics-dark))]' : 'text-white'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 kenetics-primary shadow-lg">
+          <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg">
             <nav className="flex flex-col py-4">
-              <button 
-                onClick={() => scrollToSection('home')}
-                className={`px-4 py-2 text-left font-medium transition-colors ${
-                  isActive('home') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
-                }`}
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => scrollToSection('product')}
-                className={`px-4 py-2 text-left font-medium transition-colors ${
-                  isActive('product') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
-                }`}
-              >
-                Product
-              </button>
-              <button 
-                onClick={() => scrollToSection('about')}
-                className={`px-4 py-2 text-left font-medium transition-colors ${
-                  isActive('about') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
-                }`}
-              >
-                About
-              </button>
-              <button 
-                onClick={() => scrollToSection('therapy')}
-                className={`px-4 py-2 text-left font-medium transition-colors ${
-                  isActive('therapy') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
-                }`}
-              >
-                Therapy Options
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className={`px-4 py-2 text-left font-medium transition-colors ${
-                  isActive('contact') ? 'text-black font-bold bg-black/10' : 'text-black hover:bg-black/10'
-                }`}
-              >
-                Contact
-              </button>
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`text-left px-4 py-3 font-medium transition-colors duration-300 ${
+                    activeSection === item.id 
+                      ? 'text-[hsl(var(--kenetics-primary))] bg-[hsl(var(--kenetics-primary))]/10' 
+                      : 'text-[hsl(var(--kenetics-dark))] hover:text-[hsl(var(--kenetics-primary))] hover:bg-[hsl(var(--kenetics-primary))]/5'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
             </nav>
           </div>
         )}
