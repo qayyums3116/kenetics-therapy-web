@@ -13,7 +13,7 @@ const AboutSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     const element = document.getElementById('about');
@@ -79,16 +79,16 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white min-h-screen">
       <div className="container mx-auto px-4">
         {/* Meet Kenetics Section */}
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold text-[hsl(var(--kenetics-dark))] mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <h2 className={`text-4xl md:text-5xl font-bold text-[hsl(var(--kenetics-dark))] mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Meet Kenetics
           </h2>
           
           {/* Kenetics Technology Image */}
-          <div className={`w-full max-w-3xl mx-auto mb-12 ${isVisible ? 'animate-fade-in-up delay-200' : 'opacity-0'}`}>
+          <div className={`w-full max-w-3xl mx-auto mb-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-900 to-purple-900 p-8">
               <img 
                 src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png" 
@@ -102,19 +102,19 @@ const AboutSection = () => {
 
         {/* Mission Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h3 className={`text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-6 ${isVisible ? 'animate-fade-in-up delay-300' : 'opacity-0'}`}>
+          <h3 className={`text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Our Mission
           </h3>
-          <h4 className={`text-2xl font-semibold text-[hsl(var(--kenetics-primary))] mb-6 ${isVisible ? 'animate-fade-in-up delay-400' : 'opacity-0'}`}>
+          <h4 className={`text-2xl font-semibold text-[hsl(var(--kenetics-primary))] mb-6 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Get to Know Us
           </h4>
-          <p className={`text-lg text-gray-600 leading-relaxed ${isVisible ? 'animate-fade-in-up delay-500' : 'opacity-0'}`}>
+          <p className={`text-lg text-gray-600 leading-relaxed transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             At Kenetics, we are pioneers in health technology, driven by a mission to enhance healthcare accessibility and inclusivity. Through cutting-edge technology, we empower underserved individuals with personalized at-home physical therapy exercises, revolutionizing musculoskeletal injury care. Our commitment is to make healing a seamless, cost-effective, and empowering experience for all.
           </p>
         </div>
 
         {/* Values Grid */}
-        <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20 ${isVisible ? 'animate-fade-in-up delay-600' : 'opacity-0'}`}>
+        <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {values.map((value, index) => (
             <div
               key={index}
@@ -134,7 +134,7 @@ const AboutSection = () => {
         </div>
 
         {/* Kenetics Journey Carousel */}
-        <div className={`bg-white rounded-2xl shadow-2xl overflow-hidden ${isVisible ? 'animate-fade-in-up delay-700' : 'opacity-0'}`}>
+        <div className={`bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="bg-gradient-to-r from-[hsl(var(--kenetics-primary))] to-[hsl(var(--kenetics-primary-dark))] p-8 text-center">
             <h3 className="text-3xl font-bold text-black mb-4">
               Kenetics Journey
