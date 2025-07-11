@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 
 const Product = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ backgroundColor: '#E7FF6E' }}>
       <Header />
       <div className="pt-16">
         <ProductSection />

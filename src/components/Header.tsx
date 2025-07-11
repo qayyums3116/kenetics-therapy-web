@@ -30,6 +30,7 @@ const Header = () => {
   };
 
   const activeSection = getActiveSection();
+  const isHomePage = location.pathname === '/';
 
   const navItems = [
     { id: 'home', label: 'Home', path: '/' },
@@ -42,7 +43,9 @@ const Header = () => {
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-white/10 backdrop-blur-md'
+      isHomePage 
+        ? (isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-[hsl(var(--kenetics-dark))]/90 backdrop-blur-md')
+        : 'bg-white/95 backdrop-blur-md shadow-lg'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
@@ -63,13 +66,17 @@ const Header = () => {
                 key={item.id}
                 onClick={() => handleNavClick(item.path)}
                 className={`font-medium transition-all duration-300 relative px-3 py-2 rounded-lg ${
-                  isScrolled 
-                    ? activeSection === item.id 
-                      ? 'text-black bg-[hsl(var(--kenetics-primary))]' 
-                      : 'text-[hsl(var(--kenetics-dark))] hover:text-[hsl(var(--kenetics-primary))]'
-                    : activeSection === item.id
-                      ? 'text-black bg-[hsl(var(--kenetics-primary))]'
-                      : 'text-white hover:text-[hsl(var(--kenetics-primary))]'
+                  isHomePage
+                    ? (isScrolled 
+                        ? (activeSection === item.id 
+                            ? 'text-black bg-[#E7FF6E]' 
+                            : 'text-[hsl(var(--kenetics-dark))] hover:text-[#E7FF6E] hover:bg-[hsl(var(--kenetics-dark))]/10')
+                        : (activeSection === item.id
+                            ? 'text-black bg-[#E7FF6E]'
+                            : 'text-white hover:text-[#E7FF6E]'))
+                    : (activeSection === item.id 
+                        ? 'text-black bg-[#E7FF6E]' 
+                        : 'text-[hsl(var(--kenetics-dark))] hover:text-[#E7FF6E] hover:bg-[hsl(var(--kenetics-dark))]/10')
                 }`}
               >
                 {item.label}
@@ -80,7 +87,9 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             className={`md:hidden transition-colors duration-300 ${
-              isScrolled ? 'text-[hsl(var(--kenetics-dark))]' : 'text-white'
+              isHomePage
+                ? (isScrolled ? 'text-[hsl(var(--kenetics-dark))]' : 'text-white')
+                : 'text-[hsl(var(--kenetics-dark))]'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -98,8 +107,8 @@ const Header = () => {
                   onClick={() => handleNavClick(item.path)}
                   className={`text-left px-4 py-3 font-medium transition-colors duration-300 ${
                     activeSection === item.id 
-                      ? 'text-black bg-[hsl(var(--kenetics-primary))]' 
-                      : 'text-[hsl(var(--kenetics-dark))] hover:text-white hover:bg-[hsl(var(--kenetics-primary))]'
+                      ? 'text-black bg-[#E7FF6E]' 
+                      : 'text-[hsl(var(--kenetics-dark))] hover:text-white hover:bg-[#E7FF6E]'
                   }`}
                 >
                   {item.label}
