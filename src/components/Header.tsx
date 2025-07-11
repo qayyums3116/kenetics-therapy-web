@@ -58,15 +58,12 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-[hsl(var(--kenetics-primary))] rounded-lg flex items-center justify-center">
-              <span className="font-bold text-sm text-black">K</span>
-            </div>
-            <span className={`text-xl font-bold transition-colors duration-300 ${
-              isScrolled ? 'text-[hsl(var(--kenetics-dark))]' : 'text-white'
-            }`}>
-              KENETICS
-            </span>
+          <div className="flex items-center">
+            <img 
+              src="/lovable-uploads/d0586b0f-926d-4e97-aacd-c09808a2d113.png" 
+              alt="Kenetics Solutions" 
+              className="h-10 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}
@@ -78,7 +75,7 @@ const Header = () => {
                 className={`font-medium transition-all duration-300 relative px-3 py-2 rounded-lg ${
                   isScrolled 
                     ? activeSection === item.id 
-                      ? 'text-white bg-[hsl(var(--kenetics-primary))]' 
+                      ? 'text-black bg-[hsl(var(--kenetics-primary))]' 
                       : 'text-[hsl(var(--kenetics-dark))] hover:text-[hsl(var(--kenetics-primary))]'
                     : activeSection === item.id
                       ? 'text-black bg-[hsl(var(--kenetics-primary))]'
@@ -111,7 +108,7 @@ const Header = () => {
                   onClick={() => handleNavClick(item.id)}
                   className={`text-left px-4 py-3 font-medium transition-colors duration-300 ${
                     activeSection === item.id 
-                      ? 'text-white bg-[hsl(var(--kenetics-primary))]' 
+                      ? 'text-black bg-[hsl(var(--kenetics-primary))]' 
                       : 'text-[hsl(var(--kenetics-dark))] hover:text-white hover:bg-[hsl(var(--kenetics-primary))]'
                   }`}
                 >

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -76,9 +75,9 @@
     scroll-behavior: smooth;
   }
 
-  /* Set Home section background to match footer */
+  /* Hero section now has purple gradient background */
   #hero {
-    background-color: hsl(var(--kenetics-dark));
+    /* Background is now handled directly in the component */
   }
 }
 

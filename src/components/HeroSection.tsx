@@ -12,21 +12,16 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 animate-pulse"></div>
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/30 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/30 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-pink-500/30 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-        </div>
+      {/* Purple Gradient Background matching reference */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-700 to-purple-900">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-800/20 animate-pulse"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             TRANSFORMING THE DELIVERY OF{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(var(--kenetics-primary))] to-blue-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(var(--kenetics-primary))] to-blue-300">
               AT HOME PHYSICAL THERAPY
             </span>
           </h1>
