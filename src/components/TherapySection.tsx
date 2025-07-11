@@ -63,7 +63,7 @@ const TherapySection = () => {
   ];
 
   return (
-    <section id="therapy" className="py-20 bg-white">
+    <section id="therapy" className="py-20" style={{ backgroundColor: '#E7FF6E' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className={`text-4xl md:text-5xl font-bold text-[hsl(var(--kenetics-dark))] mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
@@ -78,12 +78,12 @@ const TherapySection = () => {
           {therapyOptions.map((option, index) => (
             <div
               key={index}
-              className={`bg-gray-50 p-8 rounded-2xl hover:bg-[hsl(var(--kenetics-primary))] hover:text-black transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group cursor-pointer ${
+              className={`bg-white p-8 rounded-2xl hover:bg-[hsl(var(--kenetics-primary))] hover:text-black transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group cursor-pointer ${
                 isVisible ? `animate-fade-in-up ${option.delay}` : 'opacity-0'
               }`}
             >
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-6 group-hover:bg-black group-hover:text-[hsl(var(--kenetics-primary))] transition-all duration-300 group-hover:scale-110">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[hsl(var(--kenetics-primary))] rounded-full mb-6 group-hover:bg-black group-hover:text-[hsl(var(--kenetics-primary))] transition-all duration-300 group-hover:scale-110">
                   <option.icon size={32} />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-[hsl(var(--kenetics-dark))] group-hover:text-black transition-colors">
