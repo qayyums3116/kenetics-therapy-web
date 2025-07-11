@@ -1,20 +1,20 @@
 
 import React from 'react';
 import { ArrowRight, Play } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   const scrollToProduct = () => {
-    const productSection = document.getElementById('product');
-    if (productSection) {
-      productSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate('/product');
   };
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Purple Gradient Background matching reference */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-700 to-purple-900">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-800/20 animate-pulse"></div>
+      {/* Updated gradient background for better logo visibility */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-indigo-600/10 animate-pulse"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
