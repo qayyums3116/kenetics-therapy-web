@@ -75,6 +75,11 @@
     @apply bg-background text-foreground;
     scroll-behavior: smooth;
   }
+
+  /* Set Home section background to match footer */
+  #hero {
+    background-color: hsl(var(--kenetics-dark));
+  }
 }
 
 @layer components {

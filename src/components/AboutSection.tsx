@@ -50,18 +50,15 @@ const AboutSection = () => {
   const carouselContent = [
     {
       title: "Our Story",
-      content: "At Kenetics Solutions, we are driven by a deep passion to make technology more accessible and inclusive for everyone. We understand first-hand the challenges that individuals face when they don't receive the care they need, whether due to age, location, economic constraints, or language barriers. And that is why we strive to develop innovative technology solutions that cater to the needs of various communities.",
-      gradient: "from-purple-500 to-pink-500"
+      content: "At Kenetics Solutions, we are driven by a deep passion to make technology more accessible and inclusive for everyone. We understand first-hand the challenges that individuals face when they don't receive the care they need, whether due to age, location, economic constraints, or language barriers.",
     },
     {
       title: "Our Vision",
-      content: "We are on a mission to revolutionize the way physical therapists interact with their patients. Our innovative service, offered through a smart device, allows patients to receive customized virtual guidance from their physical therapists while performing exercises at home. Our platform is easy to use, secure, and enables patients to stay connected to their healthcare providers.",
-      gradient: "from-blue-500 to-cyan-500"
+      content: "We are on a mission to revolutionize the way physical therapists interact with their patients. Our innovative service, offered through a smart device, allows patients to receive customized virtual guidance from their physical therapists while performing exercises at home.",
     },
     {
       title: "Our Technology",
-      content: "We believe technology plays a crucial role in delivering the best possible experience for each patient. Our team of experts is always exploring innovative techniques to integrate the latest technologies. Our application provides a unique experience to each patient, using machine learning, artificial intelligence, language modeling, and augmented reality.",
-      gradient: "from-green-500 to-teal-500"
+      content: "We believe technology plays a crucial role in delivering the best possible experience for each patient. Our team of experts is always exploring innovative techniques to integrate the latest technologies using machine learning, artificial intelligence, and augmented reality.",
     }
   ];
 
@@ -77,12 +74,12 @@ const AboutSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 6000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white min-h-screen">
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4">
         {/* Meet Kenetics Section */}
         <div className="text-center mb-16">
@@ -92,7 +89,7 @@ const AboutSection = () => {
         </div>
 
         {/* Mission Section with Image */}
-        <div className="max-w-7xl mx-auto mb-16">
+        <div className="max-w-6xl mx-auto mb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Mission Content */}
             <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
@@ -107,15 +104,14 @@ const AboutSection = () => {
               </p>
             </div>
             
-            {/* Right side - Image */}
+            {/* Right side - Smaller Professional Image */}
             <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-900 to-purple-900 p-4">
+              <div className="relative w-80 h-64 mx-auto rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-blue-50 to-purple-50 border border-gray-200">
                 <img 
                   src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png" 
-                  alt="Kenetics AI Technology in Action - Real-time movement analysis and feedback"
-                  className="w-full h-auto rounded-lg shadow-lg"
+                  alt="Kenetics AI Technology - Movement Analysis"
+                  className="w-full h-full object-contain p-4"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
               </div>
             </div>
           </div>
@@ -141,32 +137,32 @@ const AboutSection = () => {
           ))}
         </div>
 
-        {/* Enhanced Kenetics Journey Carousel */}
-        <div className={`relative overflow-hidden transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="bg-gradient-to-r from-[hsl(var(--kenetics-primary))] to-[hsl(var(--kenetics-primary-dark))] p-8 text-center rounded-t-2xl">
-            <h3 className="text-3xl font-bold text-black mb-4">
+        {/* Simple Attractive Kenetics Journey Carousel */}
+        <div className={`max-w-4xl mx-auto transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">
               Kenetics Journey
             </h3>
-            <p className="text-lg text-black/80">
-              Empowering individuals through technology-driven healthcare solutions.
+            <p className="text-lg text-gray-600">
+              Empowering individuals through technology-driven healthcare solutions
             </p>
           </div>
           
-          <div className="relative bg-white shadow-2xl rounded-b-2xl overflow-hidden">
-            <div className="h-96 flex items-center">
+          <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="h-80 flex items-center">
               <div 
-                className="flex transition-all duration-1000 ease-in-out w-full"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                className="flex transition-all duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)`, width: `${carouselContent.length * 100}%` }}
               >
                 {carouselContent.map((slide, index) => (
                   <div key={index} className="w-full flex-shrink-0 px-12 py-8 flex items-center justify-center">
-                    <div className="text-center max-w-4xl">
-                      <div className={`inline-block px-6 py-2 rounded-full bg-gradient-to-r ${slide.gradient} text-white mb-6 shadow-lg transform transition-all duration-300 ${currentSlide === index ? 'scale-110 animate-pulse' : 'scale-100'}`}>
-                        <h4 className="text-2xl font-bold">
+                    <div className="text-center max-w-2xl">
+                      <div className="inline-block mb-6">
+                        <h4 className="text-2xl font-bold text-[hsl(var(--kenetics-primary))] bg-[hsl(var(--kenetics-primary))]/10 px-6 py-3 rounded-full">
                           {slide.title}
                         </h4>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-lg font-medium">
+                      <p className="text-gray-700 leading-relaxed text-lg">
                         {slide.content}
                       </p>
                     </div>
@@ -175,34 +171,34 @@ const AboutSection = () => {
               </div>
             </div>
             
-            {/* Enhanced Navigation Buttons */}
+            {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white text-[hsl(var(--kenetics-primary))] p-4 rounded-full hover:scale-125 hover:shadow-2xl transition-all duration-300 hover:bg-[hsl(var(--kenetics-primary))] hover:text-black border-2 border-[hsl(var(--kenetics-primary))] z-10"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-[hsl(var(--kenetics-primary))] text-black p-3 rounded-full hover:scale-110 transition-all duration-300 shadow-lg"
             >
-              <ChevronLeft size={28} />
+              <ChevronLeft size={20} />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-white text-[hsl(var(--kenetics-primary))] p-4 rounded-full hover:scale-125 hover:shadow-2xl transition-all duration-300 hover:bg-[hsl(var(--kenetics-primary))] hover:text-black border-2 border-[hsl(var(--kenetics-primary))] z-10"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-[hsl(var(--kenetics-primary))] text-black p-3 rounded-full hover:scale-110 transition-all duration-300 shadow-lg"
             >
-              <ChevronRight size={28} />
+              <ChevronRight size={20} />
             </button>
-          </div>
-          
-          {/* Enhanced Carousel Indicators */}
-          <div className="flex justify-center py-6 space-x-4 bg-white rounded-b-2xl">
-            {carouselContent.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-6 h-6 rounded-full transition-all duration-500 transform ${
-                  currentSlide === index 
-                    ? 'bg-[hsl(var(--kenetics-primary))] scale-150 shadow-lg animate-pulse' 
-                    : 'bg-gray-300 hover:bg-gray-400 hover:scale-125'
-                }`}
-              />
-            ))}
+            
+            {/* Indicators */}
+            <div className="flex justify-center py-6 space-x-3">
+              {carouselContent.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentSlide === index 
+                      ? 'bg-[hsl(var(--kenetics-primary))] scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

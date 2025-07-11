@@ -57,41 +57,41 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className={`${isVisible ? 'animate-fade-in-left delay-200' : 'opacity-0'}`}>
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[hsl(var(--kenetics-primary))] rounded-full flex items-center justify-center">
-                  <MapPin size={24} className="text-black" />
+            <div className="bg-white p-8 rounded-2xl shadow-lg">
+              <div className="space-y-6 mb-8">
+                <div className="flex items-center space-x-4">
+                  <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                    <MapPin size={20} className="text-[hsl(var(--kenetics-dark))]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[hsl(var(--kenetics-dark))] mb-1">Address</h3>
+                    <p className="text-gray-500 text-sm">Washington, DC</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[hsl(var(--kenetics-dark))] mb-2">Address</h3>
-                  <p className="text-gray-600">Washington, DC</p>
+
+                <div className="flex items-center space-x-4">
+                  <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                    <Phone size={20} className="text-[hsl(var(--kenetics-dark))]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[hsl(var(--kenetics-dark))] mb-1">Call Us</h3>
+                    <p className="text-gray-500 text-sm">202-929-7790</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                    <Mail size={20} className="text-[hsl(var(--kenetics-dark))]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[hsl(var(--kenetics-dark))] mb-1">Email Us</h3>
+                    <p className="text-gray-500 text-sm">keneticsolutions@gmail.com</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[hsl(var(--kenetics-primary))] rounded-full flex items-center justify-center">
-                  <Phone size={24} className="text-black" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[hsl(var(--kenetics-dark))] mb-2">Call Us</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[hsl(var(--kenetics-primary))] rounded-full flex items-center justify-center">
-                  <Mail size={24} className="text-black" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[hsl(var(--kenetics-dark))] mb-2">Email Us</h3>
-                  <p className="text-gray-600">hello@kenetics.com</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Map */}
-            <div className="mt-8">
-              <div className="bg-gray-200 h-64 rounded-2xl flex items-center justify-center relative overflow-hidden">
+              {/* Map */}
+              <div className="bg-gray-200 h-64 rounded-xl flex items-center justify-center relative overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Office Location"
