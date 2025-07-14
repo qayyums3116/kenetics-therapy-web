@@ -137,6 +137,74 @@ const AboutSection = () => {
           ))}
         </div>
 
+        {/* Innovative Capabilities Section */}
+        <div className={`max-w-4xl mx-auto mb-16 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">
+              Innovative Capabilities
+            </h3>
+          </div>
+          
+          <div className="space-y-6">
+            {[
+              { name: 'AI-POWERED THERAPY', percentage: 100 },
+              { name: 'MACHINE LEARNING ALGORITHMS', percentage: 90 },
+              { name: 'AUGMENTED REALITY (AR) INTEGRATION', percentage: 75 },
+              { name: 'TELEHEALTH & REMOTE MONITORING', percentage: 65 },
+              { name: 'DATA SECURITY & COMPLIANCE', percentage: 60 },
+              { name: 'USER-CENTRIC DESIGN & ACCESSIBILITY', percentage: 55 }
+            ].map((capability, index) => (
+              <div key={index} className="mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-medium text-[hsl(var(--kenetics-dark))]">
+                    {capability.name}
+                  </span>
+                  <span className="text-sm font-bold text-[hsl(var(--kenetics-dark))]">
+                    {capability.percentage}%
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-[hsl(var(--kenetics-dark))] h-3 rounded-full transition-all duration-2000 ease-out"
+                    style={{ 
+                      width: isVisible ? `${capability.percentage}%` : '0%',
+                      transitionDelay: `${index * 200 + 1000}ms`
+                    }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Our Impact Section */}
+        <div className={`max-w-5xl mx-auto mb-16 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">
+              Our Impact
+            </h3>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { number: 500, label: 'Personalized Therapy Plans Created' },
+              { number: 800, label: 'Patients Benefiting from AI-driven Therapy' },
+              { number: 1200, label: 'Hours of Remote Support Provided' },
+              { number: 45, label: 'Skilled Experts & Healthcare Professionals' }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className={`text-4xl font-bold text-[hsl(var(--kenetics-dark))] mb-2 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
+                     style={{ transitionDelay: `${index * 300 + 1200}ms` }}>
+                  {stat.number}
+                </div>
+                <p className="text-sm text-gray-600 leading-tight">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Simple Attractive Kenetics Journey Carousel */}
         <div className={`max-w-4xl mx-auto transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-center mb-8">
