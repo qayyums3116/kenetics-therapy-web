@@ -79,7 +79,7 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="about" className="py-20" style={{ backgroundColor: '#E7FF6E' }}>
       <div className="container mx-auto px-4">
         {/* Meet Kenetics Section */}
         <div className="text-center mb-16">
@@ -104,13 +104,13 @@ const AboutSection = () => {
               </p>
             </div>
             
-            {/* Right side - Smaller Professional Image */}
+            {/* Right side - Animated Image */}
             <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-              <div className="relative w-80 h-64 mx-auto rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-blue-50 to-purple-50 border border-gray-200">
+              <div className="relative w-80 h-64 mx-auto">
                 <img 
                   src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png" 
                   alt="Kenetics AI Technology - Movement Analysis"
-                  className="w-full h-full object-contain p-4"
+                  className="w-full h-full object-contain hover:scale-110 transition-all duration-500 ease-in-out animate-pulse hover:animate-none cursor-pointer"
                 />
               </div>
             </div>
