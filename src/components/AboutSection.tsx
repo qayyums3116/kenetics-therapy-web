@@ -1,29 +1,51 @@
-
 import React, { useEffect, useState } from 'react';
 import { Target, Users, Award, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const AboutSection = () => {
+// Hook: count up animation for numbers
+function useCountUp(target: number, isVisible: boolean, delay: number = 0) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const timeout = setTimeout(() => {
+      let start: number | null = null;
+      const duration = 2000; // animation duration in ms
+
+      const step = (timestamp: number) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        setCount(Math.floor(progress * target));
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      };
+
+      requestAnimationFrame(step);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [isVisible, target, delay]);
+
+  return count;
+}
+
+const AboutSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Intersection Observer to trigger animations
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
       { threshold: 0.1 }
     );
-
-    const element = document.getElementById('about');
-    if (element) {
-      observer.observe(element);
-    }
-
+    const el = document.getElementById('about');
+    if (el) observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
+  // Values grid data
   const values = [
     {
       icon: Target,
@@ -44,39 +66,46 @@ const AboutSection = () => {
       icon: Heart,
       title: 'Care',
       description: 'Putting patient well-being at the center of everything we do.',
-    }
+    },
   ];
 
+  // Carousel content
   const carouselContent = [
     {
-      title: "Our Story",
-      content: "At Kenetics Solutions, we are driven by a deep passion to make technology more accessible and inclusive for everyone. We understand first-hand the challenges that individuals face when they don't receive the care they need, whether due to age, location, economic constraints, or language barriers.",
+      title: 'Our Story',
+      content:
+        "At Kenetics Solutions, we are driven by a deep passion to make technology more accessible and inclusive for everyone. We understand first-hand the challenges that individuals face when they don't receive the care they need, whether due to age, location, economic constraints, or language barriers. And that is why we strive to develop innovative technology solutions that cater to the needs of various communities. Our solutions are designed to help bridge gaps, empower individuals, and improve their quality of life."
+     },
+    {
+      title: 'Our Vision',
+      content:
+        "We are on a mission to revolutionize the way physical therapists interact with their patients. Our innovative service, offered through a smart device, allows patients to receive customized virtual guidance from their physical therapists while performing exercises at home. Our platform is easy to use, secure, and enables patients to stay connected to their healthcare providers from the comfort of their own homes.",
     },
     {
-      title: "Our Vision",
-      content: "We are on a mission to revolutionize the way physical therapists interact with their patients. Our innovative service, offered through a smart device, allows patients to receive customized virtual guidance from their physical therapists while performing exercises at home.",
+      title: 'Our Technology',
+      content:
+        "We believe technology plays a crucial role in delivering the best possible experience for each patient. Our team of experts is always exploring innovative techniques to integrate the latest technologies. Our application provides a unique experience to each patient, using machine learning, artificial intelligence, language modeling, and augmented reality to ensure that every session is personalized for each individual. With our cutting-edge approach to physical therapy, we strive to provide our patients with results that exceed their expectations.",
     },
-    {
-      title: "Our Technology",
-      content: "We believe technology plays a crucial role in delivering the best possible experience for each patient. Our team of experts is always exploring innovative techniques to integrate the latest technologies using machine learning, artificial intelligence, and augmented reality.",
-    }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselContent.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselContent.length) % carouselContent.length);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % carouselContent.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + carouselContent.length) % carouselContent.length);
 
   // Auto-play carousel
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  // Capability bars data
+  const capabilities = [
+    { name: 'AI-POWERED THERAPY', percentage: 100 },
+    { name: 'MACHINE LEARNING ALGORITHMS', percentage: 90 },
+    { name: 'AUGMENTED REALITY (AR) INTEGRATION', percentage: 75 },
+    { name: 'TELEHEALTH & REMOTE MONITORING', percentage: 65 },
+    { name: 'DATA SECURITY & COMPLIANCE', percentage: 60 },
+    { name: 'USER-CENTRIC DESIGN & ACCESSIBILITY', percentage: 55 },
+  ];
 
   return (
     <section id="about" className="py-20" style={{ backgroundColor: '#E7FF6E' }}>
@@ -87,35 +116,54 @@ const AboutSection = () => {
             Meet Kenetics
           </h2>
         </div>
+{/* Mission Section with Image */}
+<section
+  id="about"
+  className="py-20"
+  style={{ backgroundColor: '#E7FF6E' }}
+>
+  <div className="max-w-6xl mx-auto mb-16">
+    {/* card container with subtle backdrop blur and rounded corners */}
+    <div
+      className={`bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl p-8
+                  grid lg:grid-cols-2 gap-8 items-start transition-all duration-1000
+                  ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+    >
 
-        {/* Mission Section with Image */}
-        <div className="max-w-6xl mx-auto mb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Mission Content */}
-            <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-6">
-                Our Mission
-              </h3>
-              <h4 className="text-2xl font-semibold text-[hsl(var(--kenetics-dark))] mb-6">
-                Get to Know Us
-              </h4>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                At Kenetics, we are pioneers in health technology, driven by a mission to enhance healthcare accessibility and inclusivity. Through cutting-edge technology, we empower underserved individuals with personalized at-home physical therapy exercises, revolutionizing musculoskeletal injury care. Our commitment is to make healing a seamless, cost-effective, and empowering experience for all.
-              </p>
-            </div>
-            
-            {/* Right side - Animated Image */}
-            <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-              <div className="relative w-80 h-64 mx-auto">
-                <img 
-                  src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png" 
-                  alt="Kenetics AI Technology - Movement Analysis"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* IMAGE with an offset color “shadow” behind it */}
+      <div className="relative flex justify-center">
+        {/* colored offset layer */}
+        <div
+          className="absolute top-4 left-4 w-full h-full
+                     bg-[hsl(var(--kenetics-primary))] opacity-20
+                     rounded-xl"
+        />
+        <img
+          src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png"
+          alt="Kenetics AI Technology - Movement Analysis"
+          className="relative w-full max-w-[280px] h-auto object-cover
+                     rounded-xl shadow-2xl"
+        />
+      </div>
+
+      {/* TEXT */}
+      <div className="flex flex-col justify-center space-y-4">
+        <h3 className="text-4xl md:text-5xl font-bold text-[hsl(var(--kenetics-dark))]">
+          Our Mission
+        </h3>
+        <h4 className="text-2xl md:text-3xl font-semibold text-[hsl(var(--kenetics-dark))]">
+          Get to Know Us
+        </h4>
+        <p className="text-lg md:text-xl text-gray-800 leading-relaxed">
+       At Kenetics, we are pioneers in health technology, driven by a mission to enhance healthcare accessibility and inclusivity. We understand first-hand the challenges individuals face when they don’t receive the care they need—whether due to age, location, economic constraints, or language barriers—and we strive to bridge these gaps. Our innovative service, delivered through a smart device, empowers underserved patients with personalized at-home physical therapy exercises. Leveraging machine learning, artificial intelligence, language modeling, and augmented reality, every session is uniquely tailored and secure, enabling real-time virtual guidance from their therapists. With our cutting-edge approach, we revolutionize musculoskeletal injury care to deliver seamless, cost-effective, and empowering healing experiences that consistently exceed expectations.
+
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
         {/* Values Grid */}
         <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -137,74 +185,65 @@ const AboutSection = () => {
           ))}
         </div>
 
-        {/* Innovative Capabilities Section */}
-        <div className={`max-w-4xl mx-auto mb-16 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+
+        {/* Innovative Capabilities */}
+        <div
+          className={`max-w-4xl mx-auto mb-16 transition-all duration-1000 delay-800
+            ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">
-              Innovative Capabilities
-            </h3>
+            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">Innovative Capabilities</h3>
           </div>
-          
-          <div className="space-y-6">
-            {[
-              { name: 'AI-POWERED THERAPY', percentage: 100 },
-              { name: 'MACHINE LEARNING ALGORITHMS', percentage: 90 },
-              { name: 'AUGMENTED REALITY (AR) INTEGRATION', percentage: 75 },
-              { name: 'TELEHEALTH & REMOTE MONITORING', percentage: 65 },
-              { name: 'DATA SECURITY & COMPLIANCE', percentage: 60 },
-              { name: 'USER-CENTRIC DESIGN & ACCESSIBILITY', percentage: 55 }
-            ].map((capability, index) => (
-              <div key={index} className="mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            {capabilities.map((cap, idx) => (
+              <div key={idx}>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm font-medium text-[hsl(var(--kenetics-dark))]">
-                    {capability.name}
+                    {cap.name}
                   </span>
                   <span className="text-sm font-bold text-[hsl(var(--kenetics-dark))]">
-                    {capability.percentage}%
+                    {cap.percentage}%
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
-                  <div 
+                  <div
                     className="bg-[hsl(var(--kenetics-dark))] h-3 rounded-full transition-all duration-2000 ease-out"
-                    style={{ 
-                      width: isVisible ? `${capability.percentage}%` : '0%',
-                      transitionDelay: `${index * 200 + 1000}ms`
+                    style={{
+                      width: isVisible ? `${cap.percentage}%` : '0%',
+                      transitionDelay: `${idx * 200 + 1000}ms`,
                     }}
-                  ></div>
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Our Impact Section */}
-        <div className={`max-w-5xl mx-auto mb-16 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        {/* Our Impact */}
+        <div
+          className={`max-w-5xl mx-auto mb-16 transition-all duration-1000 delay-1000
+            ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">
-              Our Impact
-            </h3>
+            <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-4">Our Impact</h3>
           </div>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { number: 500, label: 'Personalized Therapy Plans Created' },
               { number: 800, label: 'Patients Benefiting from AI-driven Therapy' },
               { number: 1200, label: 'Hours of Remote Support Provided' },
-              { number: 45, label: 'Skilled Experts & Healthcare Professionals' }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className={`text-4xl font-bold text-[hsl(var(--kenetics-dark))] mb-2 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
-                     style={{ transitionDelay: `${index * 300 + 1200}ms` }}>
-                  {stat.number}
+              { number: 45, label: 'Skilled Experts & Healthcare Professionals' },
+            ].map((stat, idx) => {
+              const count = useCountUp(stat.number, isVisible, idx * 300 + 1200);
+              return (
+                <div key={idx} className="text-center">
+                  <div className="text-4xl font-bold mb-2">{count}</div>
+                  <p className="text-sm text-gray-600 leading-tight">{stat.label}</p>
                 </div>
-                <p className="text-sm text-gray-600 leading-tight">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
-
         {/* Simple Attractive Kenetics Journey Carousel */}
         <div className={`max-w-4xl mx-auto transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-center mb-8">
