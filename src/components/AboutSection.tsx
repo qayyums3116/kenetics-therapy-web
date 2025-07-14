@@ -96,7 +96,7 @@ const AboutSection = () => {
               <h3 className="text-3xl font-bold text-[hsl(var(--kenetics-dark))] mb-6">
                 Our Mission
               </h3>
-              <h4 className="text-2xl font-semibold text-[hsl(var(--kenetics-primary))] mb-6">
+              <h4 className="text-2xl font-semibold text-[hsl(var(--kenetics-dark))] mb-6">
                 Get to Know Us
               </h4>
               <p className="text-lg text-gray-600 leading-relaxed">
@@ -110,7 +110,7 @@ const AboutSection = () => {
                 <img 
                   src="/lovable-uploads/bf8bd996-4d49-4ac1-b078-f2d68526fbdb.png" 
                   alt="Kenetics AI Technology - Movement Analysis"
-                  className="w-full h-full object-contain hover:scale-110 transition-all duration-500 ease-in-out animate-pulse hover:animate-none cursor-pointer"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>
